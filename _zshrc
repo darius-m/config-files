@@ -1,0 +1,60 @@
+# The following lines were added by compinstall
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
+zstyle :compinstall filename '/home/purge/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory autocd
+unsetopt beep
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# Not everything is C, though...
+export LANG="en_US.UTF-8"
+
+# Pretty cursor
+setopt PROMPT_SUBST
+
+function print_chars()
+{
+	printf "$2%.0s" $(seq 1 $1)
+}
+
+function update_ps()
+{
+	echo -en '%B%(0?.%F{green}.%F{red})'
+	echo -en '%${COLUMNS}>>'
+	echo -en '`print_chars $(( (${COLUMNS} - $(print -P "(%!:%?%)" | wc -m)) / 2 + ${COLUMNS} % 2)) "\u169b"`'
+	echo -en '(%!:%?%)'
+	echo -en '`print_chars ${COLUMNS} "\u169c"`'
+	echo -en '%>>'
+	echo -en '\n'
+	echo -en '%B%(!.%F{red}.%F{yellow})%n@%M:%F{blue}%~ %f%b'
+	echo -en '%(!.#.$) '
+}
+
+trap 'PROMPT=$(update_ps)' 'WINCH'
+PROMPT=$(update_ps)
+
+# Useful aliases
+alias ls='ls -F --color=yes'
+alias la='ls -a'
+alias ll='ls -al'
+alias l='ls'
+alias grep='grep --color=yes'
+alias ip='ip -c'
+alias vim='vim -O'
+alias clea='clear'
+
+# Make some history
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "OA" history-beginning-search-backward-end
+bindkey "OB" history-beginning-search-backward-end
