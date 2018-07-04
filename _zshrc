@@ -1,3 +1,4 @@
+
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
@@ -51,10 +52,15 @@ alias grep='grep --color=yes'
 alias ip='ip -c'
 alias vim='vim -O'
 alias clea='clear'
+alias less='less -r'
+alias colortest='~/.colortest.sh'
+alias ps='ps -ef ef'
 
 # Make some history
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "OA" history-beginning-search-backward-end
-bindkey "OB" history-beginning-search-backward-end
+bindkey "OB" history-beginning-search-forward-end
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte-2.91.sh; fi # Ubuntu Budgie END
