@@ -50,12 +50,14 @@ dmesg() {
 	command dmesg "$@" | sed "s#\\\\^\[\(\[[0-9]\(;[0-9]*\)\{0,1\}m\)#$(printf '\x1b')\1#g"
 }
 
+# Add colour to stuff
+export CLICOLOR=yes
+
 # Useful aliases
-alias ls='ls -FG'
+alias ls='ls -F'
 alias la='ls -a'
 alias ll='ls -al'
 alias l='ls'
-alias grep='grep --color=yes'
 alias ip='ip -c'
 alias vim='vim -O'
 alias clea='clear'
