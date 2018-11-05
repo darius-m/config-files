@@ -54,11 +54,12 @@ dmesg() {
 export CLICOLOR=yes
 
 # Useful aliases
-alias ls='ls -F'
+alias ls='ls -F --color'
 alias la='ls -a'
 alias ll='ls -al'
 alias l='ls'
 alias ip='ip -c'
+alias grep='grep --color'
 alias vim='vim -O'
 alias clea='clear'
 alias less='less -r'
