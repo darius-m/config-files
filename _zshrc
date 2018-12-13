@@ -15,8 +15,10 @@ unsetopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-# Not everything is C, though...
+# Make the locale and language en_US - most generic
 export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 # But vim is awesome
 export EDITOR="vim"
 
