@@ -2,11 +2,11 @@
 
 PROGNAME="${0}"
 
-BASIC_PACKAGES="git vim zsh tmux gcc make"
+BASIC_PACKAGES="git vim zsh tmux gcc make firefox termite"
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser"
 
-PKGMGRS="apt apt-get yum pkg"
+PKGMGRS="apt apt-get yum pkg pacman"
 
 usage() {
     eval 1>&2
@@ -33,6 +33,17 @@ fi
 for P in ${PKGMGRS}; do
     if command -v ${P} 2>&1 >/dev/null; then
         PKGMGR=${P}
+	if [ ${PKGMGR} = pacman ]; then
+		INSTALL=-Sy
+		UPDATE=-Syu
+		UPGRADE=-U
+		NOCONFIRM=--noconfirm
+	else
+		INSTALL=install
+		UPDATE=update
+		UPGRADE=upgrade
+		NOCONFIRM=-y
+	fi
         break
     fi
 done
@@ -59,23 +70,23 @@ if [ $# -eq 0 ]; then
 fi
 
 if [ ${UPDATE_REPOS:-0} -eq 1 ]; then
-    ${PKGMGR} update
+    ${PKGMGR} ${UPDATE}
 fi
 
 if [ ${INSTALL_BASIC:-0} -eq 1 ]; then
-    ${PKGMGR} install -y ${BASIC_PACKAGES}
+    ${PKGMGR} ${INSTALL} ${NOCONFIRM} ${BASIC_PACKAGES}
 fi
 
 if [ ${INSTALL_MEDIUM:-0} -eq 1 ]; then
-    ${PKGMGR} install -y ${MEDIUM_PACKAGES}
+    ${PKGMGR} ${INSTALL} ${NOCONFIRM} ${MEDIUM_PACKAGES}
 fi
 
 if [ ${INSTALL_FULL:-0} -eq 1 ]; then
-    ${PKGMGR} install -y ${FULL_PACKAGES}
+    ${PKGMGR} ${INSTALL} ${NOCONFIRM} ${FULL_PACKAGES}
 fi
 
 if [ ${UPGRADE_PACKAGES:-0} -eq 1 ]; then
-    ${PKGMGR} upgrade -y
+    ${PKGMGR} ${UPGRADE} ${NOCONFIRM}
 fi
 
 if [ ! -z "${SUDO_USER}" ]; then
@@ -91,16 +102,29 @@ if [ -z "${FOR_USER}" ]; then
     exit 4
 fi
 
+echo 'Delete the config files:'
+echo -n '~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh} ? '
+read ANSWER
+
+DELCMD=""
+case ${ANSWER} in
+    y*|Y*) DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+esac
+
+
 su "${FOR_USER}" -c "
 # Get the configuration files and install them
 git clone https://github.com/darius-m/vim ~/.vim.git
 git clone https://github.com/darius-m/config-files ~/.config-files.git
-mv -T -v ~/.vim.git/_vimrc ~/.vimrc
-mv -T -v ~/.vim.git/_vim ~/.vim
-mv -T -v ~/.config-files.git/_tmux.conf ~/.tmux.conf
-mv -T -v ~/.config-files.git/_zshrc ~/.zshrc
-rm -rf ~/.vim.git
-rm -rf ~/.config-files.git
+
+${DELCMD}
+
+mkdir -p ~/.config/
+[ command -f vim ] && ln -s ~/.vim.git/_vim ~/.vim && ln -s ~/.vim.git/_vimrc ~/.vimrc
+[ command -f tmux > /dev/null ] && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
+[ command -f zsh > /dev/null ] && ln -s ~/.config-files.git/_zshrc ~/.zshrc
+[ command -f termite > /dev/null ] && ln -s ~/.config-files/_config/termite ~/.config/termite
+[ command -f i3 > /dev/null ] && ln -s ~/.config-files/_i3 ~/.i3
 "
 
 echo -n 'Do you want zsh as the default shell? [y/N] '
