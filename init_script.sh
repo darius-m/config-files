@@ -4,7 +4,7 @@ PROGNAME="${0}"
 
 BASIC_PACKAGES="git vim zsh tmux gcc make firefox termite"
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib"
-FULL_PACKAGES="texlive-full inkscape gimp chromium-browser"
+FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 polybar"
 
 PKGMGRS="apt apt-get yum pkg pacman"
 
@@ -124,6 +124,7 @@ mkdir -p ~/.config/
 [ command -f tmux > /dev/null ] && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
 [ command -f zsh > /dev/null ] && ln -s ~/.config-files.git/_zshrc ~/.zshrc
 [ command -f termite > /dev/null ] && ln -s ~/.config-files/_config/termite ~/.config/termite
+[ command -f polybar > /dev/null ] && ln -s ~/.config-files/_config/polybar ~/.config/polybar
 [ command -f i3 > /dev/null ] && ln -s ~/.config-files/_i3 ~/.i3
 "
 
