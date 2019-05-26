@@ -141,9 +141,9 @@ mkdir -p ~/.config/
 command -v vim && ln -s ~/.vim.git/_vim ~/.vim && ln -s ~/.vim.git/_vimrc ~/.vimrc
 command -v tmux > /dev/null && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
 command -v zsh > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
-command -v termite > /dev/null && ln -s ~/.config-files/_config/termite ~/.config/termite
-command -v polybar > /dev/null && ln -s ~/.config-files/_config/polybar ~/.config/polybar
-command -v i3 > /dev/null && ln -s ~/.config-files/_i3 ~/.i3
+command -v termite > /dev/null && ln -s ~/.config-files.git/_config/termite ~/.config/termite
+command -v polybar > /dev/null && ln -s ~/.config-files.git/_config/polybar ~/.config/polybar
+command -v i3 > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
 "
 
 if [ ! -z "${FAILED_PACKAGES}" ]; then
