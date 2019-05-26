@@ -117,16 +117,16 @@ fi
 DELCMD=""
 if [ ${DELETE_CONF:-0} -eq 0 ]; then
 	echo -n 'Delete the config files: '
-	echo -n '~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh} ? '
+	echo -n '~/.vimrc ~/.i3 ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh} ? '
 	read ANSWER
 
 	case ${ANSWER} in
-		y*|Y*) DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+		y*|Y*) DELETE_CONF=1 ;;
 	esac
 fi
 
 if [ ${DELETE_CONF:-0} -eq 1 ]; then
-	DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+	DELCMD="rm -rf ~/.i3 ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
 fi
 
 
