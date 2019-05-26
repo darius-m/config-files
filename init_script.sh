@@ -117,7 +117,7 @@ fi
 DELCMD=""
 if [ ${DELETE_CONF:-0} -eq 0 ]; then
 	echo -n 'Delete the config files: '
-	echo -n '~/.vimrc ~/.i3 ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh} ? '
+	echo -n '~/.vimrc ~/.i3 ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/termite ~/.config/polybar ? '
 	read ANSWER
 
 	case ${ANSWER} in
@@ -126,7 +126,7 @@ if [ ${DELETE_CONF:-0} -eq 0 ]; then
 fi
 
 if [ ${DELETE_CONF:-0} -eq 1 ]; then
-	DELCMD="rm -rf ~/.i3 ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+	DELCMD="rm -rf ~/.i3 ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/termite ~/.config/polybar"
 fi
 
 
@@ -144,6 +144,7 @@ command -v zsh > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
 command -v termite > /dev/null && ln -s ~/.config-files.git/_config/termite ~/.config/termite
 command -v polybar > /dev/null && ln -s ~/.config-files.git/_config/polybar ~/.config/polybar
 command -v i3 > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
+command -v i3blocks > /dev/null && ln -s ~/.config-files.git/_config/i3blocks ~/.config/i3blocks
 "
 
 if [ ! -z "${FAILED_PACKAGES}" ]; then
