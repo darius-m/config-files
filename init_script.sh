@@ -6,7 +6,7 @@ PROGNAME="${0}"
 
 BASIC_PACKAGES="git vim zsh tmux gcc make firefox termite"
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib"
-FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 polybar"
+FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar"
 FAILED_PACKAGES=""
 
 PKGMGRS="apt apt-get yum pkg pacman"
