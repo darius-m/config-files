@@ -123,8 +123,8 @@ bindsym $mod+0 mode "$sys_lock"
 set $sys_lock (l)ock, (Shift-r)estart, (Shift-s)hutdown
 mode "$sys_lock" {
         bindsym l exec --no-startup-id i3lock -i /usr/share/backgrounds/warty-final-ubuntu.png -f, mode default
-        bindsym Shift-r exec --no-startup-id reboot
-        bindsym Shift-s exec --no-startup-id poweroff
+        bindsym Shift+r exec --no-startup-id reboot
+        bindsym Shift+s exec --no-startup-id poweroff
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
