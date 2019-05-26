@@ -12,30 +12,30 @@ FAILED_PACKAGES=""
 PKGMGRS="apt apt-get yum pkg pacman"
 
 usage() {
-    eval 1>&2
+	eval 1>&2
 
-    printf -- "Usage: %s [-bfhmuU]\n" ${PROGNAME}
-    printf -- "\n"
-    printf -- "Options:\n"
-    printf -- "  -b    Install basic packages (default)\n"
-    printf -- "  -m    Install basic and some complex packages\n"
-    printf -- "  -f    Install all packages (full) install\n"
-    printf -- "  -h    Show this help message\n"
-    printf -- "  -u    Update repositories before installing\n"
-    printf -- "  -U    Upgrade installed packages\n"
+	printf -- "Usage: %s [-bfhmuU]\n" ${PROGNAME}
+	printf -- "\n"
+	printf -- "Options:\n"
+	printf -- "  -b	Install basic packages (default)\n"
+	printf -- "  -m	Install basic and some complex packages\n"
+	printf -- "  -f	Install all packages (full) install\n"
+	printf -- "  -h	Show this help message\n"
+	printf -- "  -u	Update repositories before installing\n"
+	printf -- "  -U	Upgrade installed packages\n"
 
-    exit ${1}
+	exit ${1}
 }
 
 if [ $(id -u) -ne 0 ]; then
-    echo "This script must be run as administrator" 1>&2
-    echo "Use 'sudo ${PROGNAME}' or switch user to root before running" 1>&2
-    exit 2
+	echo "This script must be run as administrator" 1>&2
+	echo "Use 'sudo ${PROGNAME}' or switch user to root before running" 1>&2
+	exit 2
 fi
 
 for P in ${PKGMGRS}; do
-    if command -v ${P} 2>&1 >/dev/null; then
-        PKGMGR=${P}
+	if command -v ${P} 2>&1 >/dev/null; then
+		PKGMGR=${P}
 	if [ ${PKGMGR} = pacman ]; then
 		INSTALL=-Sy
 		UPDATE=-Syu
@@ -47,71 +47,71 @@ for P in ${PKGMGRS}; do
 		UPGRADE=upgrade
 		NOCONFIRM=-y
 	fi
-        break
-    fi
+		break
+	fi
 done
 
 if [ -z "${PKGMGR}" ]; then
-    echo "Unknown package manager!" 1>&2
-    exit 3
+	echo "Unknown package manager!" 1>&2
+	exit 3
 fi
 
 while getopts "bdfhmuU" opt; do
-    case "${opt}" in
-    b) INSTALL_BASIC=1 ;;
-    m) INSTALL_BASIC=1; INSTALL_MEDIUM=1 ;;
-    d) DELETE_CONF=1 ;;
-    f) INSTALL_BASIC=1; INSTALL_MEDIUM=1; INSTALL_FULL=1 ;;
-    u) UPDATE_REPOS=1 ;;
-    U) UPGRADE_PACKAGES=1 ;;
-    h) usage 0 ;;
-    *) usage 1 ;;
-    esac
+	case "${opt}" in
+	b) INSTALL_BASIC=1 ;;
+	m) INSTALL_BASIC=1; INSTALL_MEDIUM=1 ;;
+	d) DELETE_CONF=1 ;;
+	f) INSTALL_BASIC=1; INSTALL_MEDIUM=1; INSTALL_FULL=1 ;;
+	u) UPDATE_REPOS=1 ;;
+	U) UPGRADE_PACKAGES=1 ;;
+	h) usage 0 ;;
+	*) usage 1 ;;
+	esac
 done
 
 if [ $# -eq 0 ]; then
-    INSTALL_BASIC=1
+	INSTALL_BASIC=1
 fi
 
 install() {
-    for PACKAGE in "$@"; do
-        if ! ${PKGMGR} ${INSTALL} ${NOCONFIRM} "${PACKAGE}"; then
+	for PACKAGE in "$@"; do
+		if ! ${PKGMGR} ${INSTALL} ${NOCONFIRM} "${PACKAGE}"; then
 		FAILED_PACKAGES="${FAILED_PACKAGES} ${PACKAGE}"
 	fi
-    done
+	done
 }
 
 if [ ${UPDATE_REPOS:-0} -eq 1 ]; then
-    ${PKGMGR} ${UPDATE}
+	${PKGMGR} ${UPDATE}
 fi
 
 if [ ${INSTALL_BASIC:-0} -eq 1 ]; then
-    install ${BASIC_PACKAGES}
+	install ${BASIC_PACKAGES}
 fi
 
 if [ ${INSTALL_MEDIUM:-0} -eq 1 ]; then
-    install ${MEDIUM_PACKAGES}
+	install ${MEDIUM_PACKAGES}
 fi
 
 if [ ${INSTALL_FULL:-0} -eq 1 ]; then
-    install ${FULL_PACKAGES}
+	install ${FULL_PACKAGES}
 fi
 
 if [ ${UPGRADE_PACKAGES:-0} -eq 1 ]; then
-    ${PKGMGR} ${UPGRADE} ${NOCONFIRM}
+	${PKGMGR} ${UPGRADE} ${NOCONFIRM}
 fi
 
 if [ ! -z "${SUDO_USER}" ]; then
-    FOR_USER="${SUDO_USER}"
+	FOR_USER="${SUDO_USER}"
 else
-    echo "Command not ran using sudo. Using 'logname' in stead" 1>&2
-    FOR_USER="$(logname)"
+	echo "Command not ran using sudo. Using 'logname' in stead" 1>&2
+	FOR_USER="$(logname)"
 fi
 
 # Configuration files should be placed for the regular user
 if [ -z "${FOR_USER}" ]; then
-    echo "Could not get user who ran the script!" 1>&2
-    exit 4
+	echo "Could not get user who ran the script!" 1>&2
+	exit 4
 fi
 
 DELCMD=""
@@ -121,12 +121,12 @@ if [ ${DELETE_CONF:-0} -eq 0 ]; then
 	read ANSWER
 
 	case ${ANSWER} in
-	    y*|Y*) DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+		y*|Y*) DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
 	esac
 fi
 
 if [ ${DELETE_CONF:-0} -eq 1 ]; then
-    DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+	DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
 fi
 
 
@@ -147,12 +147,12 @@ command -v i3 > /dev/null && ln -s ~/.config-files/_i3 ~/.i3
 "
 
 if [ ! -z "${FAILED_PACKAGES}" ]; then
-    printf '\e[1;31mFailed to install:%s\e[m\n' "${FAILED_PACKAGES}"
+	printf '\e[1;31mFailed to install:%s\e[m\n' "${FAILED_PACKAGES}"
 fi
 
 echo -n 'Do you want zsh as the default shell? [y/N] '
 read ANSWER
 
 case "${ANSWER}" in
-    y*|Y*) chsh -s "$(command -v zsh)" "${FOR_USER}"
+	y*|Y*) chsh -s "$(command -v zsh)" "${FOR_USER}"
 esac
