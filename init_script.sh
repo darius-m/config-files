@@ -120,12 +120,12 @@ git clone https://github.com/darius-m/config-files ~/.config-files.git
 ${DELCMD}
 
 mkdir -p ~/.config/
-[ command -f vim ] && ln -s ~/.vim.git/_vim ~/.vim && ln -s ~/.vim.git/_vimrc ~/.vimrc
-[ command -f tmux > /dev/null ] && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
-[ command -f zsh > /dev/null ] && ln -s ~/.config-files.git/_zshrc ~/.zshrc
-[ command -f termite > /dev/null ] && ln -s ~/.config-files/_config/termite ~/.config/termite
-[ command -f polybar > /dev/null ] && ln -s ~/.config-files/_config/polybar ~/.config/polybar
-[ command -f i3 > /dev/null ] && ln -s ~/.config-files/_i3 ~/.i3
+command -v vim && ln -s ~/.vim.git/_vim ~/.vim && ln -s ~/.vim.git/_vimrc ~/.vimrc
+command -v tmux > /dev/null && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
+command -v zsh > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
+command -v termite > /dev/null && ln -s ~/.config-files/_config/termite ~/.config/termite
+command -v polybar > /dev/null && ln -s ~/.config-files/_config/polybar ~/.config/polybar
+command -v i3 > /dev/null && ln -s ~/.config-files/_i3 ~/.i3
 "
 
 echo -n 'Do you want zsh as the default shell? [y/N] '
