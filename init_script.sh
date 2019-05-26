@@ -1,10 +1,13 @@
 #!/bin/sh
 
+set -u
+
 PROGNAME="${0}"
 
 BASIC_PACKAGES="git vim zsh tmux gcc make firefox termite"
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 polybar"
+FAILED_PACKAGES=""
 
 PKGMGRS="apt apt-get yum pkg pacman"
 
@@ -53,10 +56,11 @@ if [ -z "${PKGMGR}" ]; then
     exit 3
 fi
 
-while getopts "bfhmuU" opt; do
+while getopts "bdfhmuU" opt; do
     case "${opt}" in
     b) INSTALL_BASIC=1 ;;
-    m) INSTALL_BASIC=1; INSTALL_MEDIUM=1;;
+    m) INSTALL_BASIC=1; INSTALL_MEDIUM=1 ;;
+    d) DELETE_CONF=1 ;;
     f) INSTALL_BASIC=1; INSTALL_MEDIUM=1; INSTALL_FULL=1 ;;
     u) UPDATE_REPOS=1 ;;
     U) UPGRADE_PACKAGES=1 ;;
@@ -69,20 +73,28 @@ if [ $# -eq 0 ]; then
     INSTALL_BASIC=1
 fi
 
+install() {
+    for PACKAGE in "$@"; do
+        if ! ${PKGMGR} ${INSTALL} ${NOCONFIRM} "${PACKAGE}"; then
+		FAILED_PACKAGES="${FAILED_PACKAGES} ${PACKAGE}"
+	fi
+    done
+}
+
 if [ ${UPDATE_REPOS:-0} -eq 1 ]; then
     ${PKGMGR} ${UPDATE}
 fi
 
 if [ ${INSTALL_BASIC:-0} -eq 1 ]; then
-    ${PKGMGR} ${INSTALL} ${NOCONFIRM} ${BASIC_PACKAGES}
+    install ${BASIC_PACKAGES}
 fi
 
 if [ ${INSTALL_MEDIUM:-0} -eq 1 ]; then
-    ${PKGMGR} ${INSTALL} ${NOCONFIRM} ${MEDIUM_PACKAGES}
+    install ${MEDIUM_PACKAGES}
 fi
 
 if [ ${INSTALL_FULL:-0} -eq 1 ]; then
-    ${PKGMGR} ${INSTALL} ${NOCONFIRM} ${FULL_PACKAGES}
+    install ${FULL_PACKAGES}
 fi
 
 if [ ${UPGRADE_PACKAGES:-0} -eq 1 ]; then
@@ -102,14 +114,20 @@ if [ -z "${FOR_USER}" ]; then
     exit 4
 fi
 
-echo 'Delete the config files:'
-echo -n '~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh} ? '
-read ANSWER
-
 DELCMD=""
-case ${ANSWER} in
-    y*|Y*) DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
-esac
+if [ ${DELETE_CONF:-0} -eq 0 ]; then
+	echo -n 'Delete the config files: '
+	echo -n '~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh} ? '
+	read ANSWER
+
+	case ${ANSWER} in
+	    y*|Y*) DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+	esac
+fi
+
+if [ ${DELETE_CONF:-0} -eq 1 ]; then
+    DELCMD="rm -rf ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/termite/config ~/.config/polybar/{config,launch.sh}"
+fi
 
 
 su "${FOR_USER}" -c "
@@ -127,6 +145,10 @@ command -v termite > /dev/null && ln -s ~/.config-files/_config/termite ~/.confi
 command -v polybar > /dev/null && ln -s ~/.config-files/_config/polybar ~/.config/polybar
 command -v i3 > /dev/null && ln -s ~/.config-files/_i3 ~/.i3
 "
+
+if [ ! -z "${FAILED_PACKAGES}" ]; then
+    printf '\e[1;31mFailed to install:%s\e[m\n' "${FAILED_PACKAGES}"
+fi
 
 echo -n 'Do you want zsh as the default shell? [y/N] '
 read ANSWER
