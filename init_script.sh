@@ -4,8 +4,8 @@ set -u
 
 PROGNAME="${0}"
 
-BASIC_PACKAGES="git vim zsh tmux gcc make firefox termite"
-MEDIUM_PACKAGES="htop unzip zip gcc-multilib"
+BASIC_PACKAGES="git vim zsh tmux gcc make"
+MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar"
 FAILED_PACKAGES=""
 
@@ -36,17 +36,17 @@ fi
 for P in ${PKGMGRS}; do
 	if command -v ${P} 2>&1 >/dev/null; then
 		PKGMGR=${P}
-	if [ ${PKGMGR} = pacman ]; then
-		INSTALL=-Sy
-		UPDATE=-Syu
-		UPGRADE=-U
-		NOCONFIRM=--noconfirm
-	else
-		INSTALL=install
-		UPDATE=update
-		UPGRADE=upgrade
-		NOCONFIRM=-y
-	fi
+		if [ ${PKGMGR} = pacman ]; then
+			INSTALL=-Sy
+			UPDATE=-Syu
+			UPGRADE=-U
+			NOCONFIRM=--noconfirm
+		else
+			INSTALL=install
+			UPDATE=update
+			UPGRADE=upgrade
+			NOCONFIRM=-y
+		fi
 		break
 	fi
 done
@@ -76,8 +76,8 @@ fi
 install() {
 	for PACKAGE in "$@"; do
 		if ! ${PKGMGR} ${INSTALL} ${NOCONFIRM} "${PACKAGE}"; then
-		FAILED_PACKAGES="${FAILED_PACKAGES} ${PACKAGE}"
-	fi
+			FAILED_PACKAGES="${FAILED_PACKAGES} ${PACKAGE}"
+		fi
 	done
 }
 
