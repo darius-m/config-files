@@ -24,7 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/share/i3blocks/$BLOCK_NAME
+command=~/.config/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
@@ -45,8 +45,7 @@ signal=10
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
-separator=false
+label=📝
 interval=5
 
 # Disk usage
@@ -55,7 +54,7 @@ interval=5
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=HOME
+label=💽
 #instance=/mnt/data
 interval=30
 
@@ -65,18 +64,18 @@ interval=30
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 #instance=wlan0
+label=🛰️
 color=#00FF00
-interval=10
-separator=false
+interval=1
 
 [wifi]
 #instance=wlp3s0
-interval=10
-separator=false
+label=WIFI
+interval=1
 
 [bandwidth]
 #instance=eth0
-interval=5
+interval=1
 
 # CPU usage
 #
@@ -84,9 +83,8 @@ interval=5
 # see the script for details.
 [cpu_usage]
 label=CPU
-interval=10
-min_width=CPU:100.00%
-#separator=false
+min_width=100.00%
+interval=1
 
 #[load_average]
 #interval=10
@@ -98,7 +96,7 @@ min_width=CPU:100.00%
 #label=BAT
 label=⚡
 #instance=1
-interval=30
+interval=5
 
 # Date Time
 #
