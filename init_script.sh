@@ -5,7 +5,7 @@ set -u
 PROGNAME="${0}"
 
 BASIC_PACKAGES="git vim zsh tmux gcc make"
-MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite"
+MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar"
 FAILED_PACKAGES=""
 
@@ -144,6 +144,7 @@ command -v termite > /dev/null && ln -s ~/.config-files.git/_config/termite ~/.c
 command -v polybar > /dev/null && ln -s ~/.config-files.git/_config/polybar ~/.config/polybar
 command -v i3 > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
 command -v i3blocks > /dev/null && ln -s ~/.config-files.git/_config/i3blocks ~/.config/i3blocks
+command -v zathura > /dev/null && xdg-mime default zathura.desktop application/pdf
 "
 
 if [ ! -z "${FAILED_PACKAGES}" ]; then
