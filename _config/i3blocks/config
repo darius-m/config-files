@@ -84,7 +84,6 @@ interval=1
 # see the script for details.
 [cpu_usage]
 label=CPU
-min_width=100.00%
 interval=1
 
 #[load_average]
