@@ -35,18 +35,18 @@ markup=none
 # See the script for details.
 [volume]
 #label=VOL
-label=♪
 instance=Master
 #instance=PCM
 interval=once
 command=~/.config/i3blocks/volume "5%" pulse
 signal=10
+interval=2
 
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=📝
+label=🐏
 interval=5
 
 # Disk usage
@@ -83,7 +83,7 @@ interval=1
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU
+label=🧠
 interval=1
 
 #[load_average]
