@@ -28,19 +28,13 @@ command=~/.config/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Volume indicator
+# CPU usage
 #
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
-[volume]
-#label=VOL
-instance=Master
-#instance=PCM
-interval=once
-command=~/.config/i3blocks/volume "5%" pulse
-signal=10
-interval=2
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=🧠
+interval=1
 
 # Memory usage
 #
@@ -78,14 +72,6 @@ interval=1
 #instance=eth0
 interval=1
 
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[cpu_usage]
-label=🧠
-interval=1
-
 #[load_average]
 #interval=10
 
@@ -93,10 +79,19 @@ interval=1
 #
 # The battery instance defaults to 0.
 [battery]
-#label=BAT
 label=⚡
-#instance=1
 interval=5
+
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+[volume]
+instance=Master
+command=~/.config/i3blocks/volume "5%" pulse
+signal=10
+interval=2
 
 # Date Time
 #
