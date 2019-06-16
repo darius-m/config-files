@@ -66,25 +66,27 @@ tx_diff=$(( $tx - ${old[2]} ))
 rx_rate=$(( $rx_diff / $time_diff ))
 tx_rate=$(( $tx_diff / $time_diff ))
 
-# shift by 10 bytes to get KiB/s. If the value is larger than
-# 1024^2 = 1048576, then display MiB/s instead
+awk -v rx=${rx_rate} -v tx=${tx_rate} '
+BEGIN {
+    i_rx = 0; i_tx = 0;
+    mult = "bKMGT";
+    for (i = 1; i <= length(mult); i++) {
+        if (i_rx == 0) {
+            if (rx < 1024)
+                i_rx = i;
+            else
+                rx /= 1024;
+        }
 
-# incoming
-echo -n "⬇️ "
-rx_kib=$(( $rx_rate >> 10 ))
-if [[ "$rx_rate" -gt 1048576 ]]; then
-  printf '%5s' "`echo "scale=1; $rx_kib / 1024" | bc`M"
-else
-  printf '%5s' "${rx_kib}K"
-fi
+        if (i_tx == 0) {
+            if (tx < 1024)
+                i_tx = i;
+            else
+                tx /= 1024;
+        }
+    }
 
-echo -n "  "
-
-# outgoing
-echo -n "⬆️ "
-tx_kib=$(( $tx_rate >> 10 ))
-if [[ "$tx_rate" -gt 1048576 ]]; then
-  printf '%5s' "`echo "scale=1; $tx_kib / 1024" | bc`M"
-else
-  printf '%5s' "${tx_kib}K"
-fi
+    printf "⬇️ %7.2f%s / ⬆️ %7.2f%s\n",
+        rx, substr(mult, i_rx, 1),
+        tx, substr(mult, i_tx, 1);
+}'
