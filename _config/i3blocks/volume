@@ -50,15 +50,6 @@ volume() {
   amixer -D $MIXER get $SCONTROL $(capability)
 }
 
-format() {
-  perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
-  perl_filter+='{CORE::say $4 eq "off" ? "MUTE" : "'
-  # If dB was selected, print that instead
-  perl_filter+=$([[ $STEP = *dB ]] && echo '$3' || echo '$1')
-  perl_filter+='"; exit}'
-  perl -ne "$perl_filter"
-}
-
 #------------------------------------------------------------------------
 
 case $BLOCK_BUTTON in
@@ -67,4 +58,32 @@ case $BLOCK_BUTTON in
   5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
 esac
 
-volume | format
+volume | awk '
+BEGIN {
+    ch = 1;
+}
+
+/\[.*\]/ {
+    split($0, params, "[][]");
+    perc[ch] = params[2];
+    stat[ch] = params[4]
+    ch++
+};
+
+END {
+    percent = int(perc[1]);
+    status = stat[1]
+
+    if (status == "off") {
+        icon = "🔇";
+    } else {
+        if (percent <= 30)
+            icon = "🔈";
+        else if (percent <= 70)
+            icon = "🔉";
+        else
+            icon = "🔊";
+    }
+
+    printf "%s %3d%%\n", icon, percent;
+}'
