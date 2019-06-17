@@ -8,9 +8,6 @@ set modeline
 
 filetype plugin on
 
-" Mapping from usenet.
-imap jj <Esc>
-
 " Per-filetype settings
 autocmd FileType java		setlocal tw=78 cin foldmethod=marker
 autocmd FileType c,cpp		setlocal tw=80 cindent noexpandtab
