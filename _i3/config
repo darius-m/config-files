@@ -28,6 +28,9 @@ font xft:FontAwesome, LiberationMono 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Automatically lock screen after some time
+exec --no-startup-id xautolock -time 5 -locker 'i3lock -i $wallpaper -f mode default' &
+
 # start a terminal
 bindsym $mod+Return exec $terminal
 
@@ -123,7 +126,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$sys_lock"
 set $sys_lock (l)ock, (Shift+r)estart, (Shift+s)hutdown, (Shift+l)ogout
 mode "$sys_lock" {
-        bindsym l       exec --no-startup-id i3lock -i $wallpaper -f, mode "default"
+        bindsym l       exec --no-startup-id i3lock -i $wallpaper -f mode "default"
         bindsym Shift+r exec --no-startup-id reboot, mode "default"
         bindsym Shift+s exec --no-startup-id poweroff, mode "default"
         bindsym Shift+l exec --no-startup-id i3-msg exit, mode "default"
