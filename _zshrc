@@ -65,7 +65,7 @@ alias grep='grep --color'
 alias vim='vim -O'
 alias clea='clear'
 alias less='less -r'
-alias colortest='~/.colortest.sh'
+alias colortest='~/.config-files.git/_colortest.sh'
 alias ps='ps -f'
 
 # Make some history
