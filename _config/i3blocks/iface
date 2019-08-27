@@ -59,8 +59,10 @@ esac
 #------------------------------------------------------------------------
 
 if [ ! -z "$(cat /sys/class/net/$IF/address)" ]; then
-  echo "$(cat /sys/class/net/$IF/address) | $IPADDR" # short text
-  echo "$(cat /sys/class/net/$IF/address) | $IPADDR" # full text
+  #echo "$(cat /sys/class/net/$IF/address) | $IPADDR" # short text
+  #echo "$(cat /sys/class/net/$IF/address) | $IPADDR" # full text
+  echo "$IPADDR" # full text
+  echo "$IPADDR" # full text
 else
   echo "☄️"
   echo "☄️"
