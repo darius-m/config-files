@@ -76,3 +76,6 @@ bindkey "[A" history-beginning-search-backward-end
 bindkey "[B" history-beginning-search-forward-end
 bindkey "OA" history-beginning-search-backward-end
 bindkey "OB" history-beginning-search-forward-end
+
+# Add scripts to path
+export PATH="${PATH}":~/.config-files.git/_scripts/
