@@ -132,7 +132,13 @@ fi
 
 su "${FOR_USER}" -c "
 # Get the configuration files and install them
-git clone https://github.com/darius-m/config-files ~/.config-files.git
+if [ -d ~/.config-files.git ]; then
+    pushd ~/.config-files.git
+    git pull origin master || exit 1
+    popd
+else
+    git clone https://github.com/darius-m/config-files ~/.config-files.git
+fi
 
 ${DELCMD}
 
