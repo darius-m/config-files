@@ -143,7 +143,7 @@ fi
 ${DELCMD}
 
 mkdir -p ~/.config/
-command -v vim && ln -s ~/.config-files.git/vim/_vim ~/.vim && ln -s ~/.config-files.git/vim/_vimrc ~/.vimrc
+command -v vim > /dev/null && ln -s ~/.config-files.git/vim/_vim ~/.vim && ln -s ~/.config-files.git/vim/_vimrc ~/.vimrc
 command -v tmux > /dev/null && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
 command -v zsh > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
 command -v termite > /dev/null && ln -s ~/.config-files.git/_config/termite ~/.config/termite
