@@ -51,11 +51,14 @@ volume() {
 }
 
 #------------------------------------------------------------------------
+[ ${BLOCK_BUTTON:-0} -eq 3 -o "${3}" = "mute" ] && CTRL="MUTE"
+[ ${BLOCK_BUTTON:-0} -eq 4 -o "${3}" = "up"   ] && CTRL="UP"
+[ ${BLOCK_BUTTON:-0} -eq 5 -o "${3}" = "down" ] && CTRL="DOWN"
 
-case $BLOCK_BUTTON in
-  3) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
-  4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
-  5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
+case $CTRL in
+  MUTE) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
+  UP)   amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
+  DOWN) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
 esac
 
 volume | awk '
