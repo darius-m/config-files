@@ -96,7 +96,7 @@ interval=2
 # Date Time
 #
 [time]
-command=date '+%d-%m-%y %H:%M:%S'
+command=~/.config/i3blocks/date
 interval=1
 
 # Generic media player support
