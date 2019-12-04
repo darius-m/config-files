@@ -67,6 +67,7 @@ alias clea='clear'
 alias less='less -r'
 alias colortest='~/.config-files.git/_colortest.sh'
 alias ps='ps -f'
+alias shred='shred -zv'
 
 # Make some history
 autoload -U history-search-end
