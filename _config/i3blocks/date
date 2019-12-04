@@ -2,7 +2,14 @@
 
 date '+%d-%m-%y %H:%M:%S'
 date '+%d-%m-%y %H:%M:%S'
-echo "$(cat /dev/urandom | tr -dc '0-9a-f' | head -c 6 | awk '{ printf "#%06x", 0xc0c0c0 + strtonum("0x"$1) % 0x303030}')"
+awk 'BEGIN {
+    srand()
+    minval = 0xa0
+    maxval = 0x100 - minval
+    for (i = 0; i < 3; ++i)
+        s = sprintf("%s%02x", s, int(minval + rand() * maxval))
+    printf "#%s\n", s
+}'
 
 case $BLOCK_BUTTON in
     1) notify-send "$(ncal -Mhb)";;
