@@ -4,12 +4,13 @@ date '+%d-%m-%y %H:%M:%S'
 date '+%d-%m-%y %H:%M:%S'
 awk 'BEGIN {
     srand()
-    minval = 0xa0
+    minval = 0x80
     maxval = 0x100 - minval
-    for (i = 0; i < 3; ++i)
-        s = sprintf("%s%02x", s, int(minval + rand() * maxval))
-    printf "#%s\n", s
-}'
+    red   = int(rand() * maxval)
+    green = int(rand() * maxval)
+    blue  = maxval - (red + green) / 2
+    printf "#%02x%02x%02x\n", red + minval, green + minval, blue + minval
+}' |& tee /home/purge/.datescript.log
 
 case $BLOCK_BUTTON in
     1) notify-send "$(ncal -Mhb)";;

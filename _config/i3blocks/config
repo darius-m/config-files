@@ -72,8 +72,8 @@ interval=1
 #instance=eth0
 interval=1
 
-#[load_average]
-#interval=10
+[load_average]
+interval=3
 
 # Battery indicator
 #
