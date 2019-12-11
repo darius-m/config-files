@@ -101,7 +101,7 @@ if [ ${UPGRADE_PACKAGES:-0} -eq 1 ]; then
 	${PKGMGR} ${UPGRADE} ${NOCONFIRM}
 fi
 
-if [ ! -z "${SUDO_USER}" ]; then
+if [ ! -z "${SUDO_USER:-}" ]; then
 	FOR_USER="${SUDO_USER}"
 else
 	echo "Command not ran using sudo. Using 'logname' in stead" 1>&2
