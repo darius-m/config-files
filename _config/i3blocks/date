@@ -10,7 +10,7 @@ awk 'BEGIN {
     green = int(rand() * maxval)
     blue  = maxval - (red + green) / 2
     printf "#%02x%02x%02x\n", red + minval, green + minval, blue + minval
-}' |& tee /home/purge/.datescript.log
+}'
 
 case $BLOCK_BUTTON in
     1) notify-send "$(ncal -Mhb)";;
