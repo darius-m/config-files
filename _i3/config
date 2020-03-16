@@ -31,6 +31,9 @@ floating_modifier $mod
 # Automatically lock screen after some time
 exec --no-startup-id xautolock -time 5 -locker 'i3lock -i $wallpaper -f' &
 
+# Create a binding to use the GNOME screenshot tool
+bindsym $mod+p exec --no-startup-id gnome-screenshot -i
+
 # start a terminal
 bindsym $mod+Return exec $terminal
 
