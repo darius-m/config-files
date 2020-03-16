@@ -179,3 +179,6 @@ bar {
 
 # Enable touchpad touch click
 exec --no-startup-id ~/.i3/touch_click.sh
+
+# Make Teams notifications floating
+for_window [title="Microsoft Teams Notification"] floating enable
