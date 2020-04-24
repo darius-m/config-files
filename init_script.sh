@@ -7,7 +7,7 @@ PROGNAME="${0}"
 BASIC_PACKAGES="git vim zsh tmux gcc make "
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree cscope ctags"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar "
-FULL_PACKAGES+="xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf "
+FULL_PACKAGES+="xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf gnome-terminal "
 FULL_PACKAGES+="gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre "
 FAILED_PACKAGES=""
 
@@ -152,6 +152,7 @@ command -v termite > /dev/null && ln -s ~/.config-files.git/_config/termite ~/.c
 command -v polybar > /dev/null && ln -s ~/.config-files.git/_config/polybar ~/.config/polybar
 command -v i3 > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
 command -v i3blocks > /dev/null && ln -s ~/.config-files.git/_config/i3blocks ~/.config/i3blocks
+command -v compton > /dev/null && ln -s ~/.config-files.git/_config/compton.conf ~/.config/compton.conf
 command -v zathura > /dev/null && xdg-mime default zathura.desktop application/pdf
 "
 
