@@ -70,6 +70,7 @@ alias less='less -r'
 alias colortest='~/.config-files.git/_colortest.sh'
 alias ps='ps -f'
 alias shred='shred -zv'
+alias fvim='[ -d "${1:-.}" ] && vim "$(fzf ${1})" || vim'
 
 # Make some history
 autoload -U history-search-end

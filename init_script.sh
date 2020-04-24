@@ -7,7 +7,7 @@ PROGNAME="${0}"
 BASIC_PACKAGES="git vim zsh tmux gcc make "
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree cscope ctags"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar "
-FULL_PACKAGES+="xautolock lm-sensors filezilla gnome-screenshot pavucontrol "
+FULL_PACKAGES+="xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf "
 FULL_PACKAGES+="gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre "
 FAILED_PACKAGES=""
 
