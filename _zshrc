@@ -54,6 +54,10 @@ dmesg() {
 	command dmesg "$@" | sed "s#\\\\^\[\(\[[0-9]\(;[0-9]*\)\{0,1\}m\)#$(printf '\x1b')\1#g"
 }
 
+fvim() {
+    [ $# -eq 1 -a -d "${1:-.}" ] && vim "$(find ${1} | fzf)" || vim $@
+}
+
 # Add colour to stuff
 export CLICOLOR=yes
 
@@ -70,7 +74,6 @@ alias less='less -r'
 alias colortest='~/.config-files.git/_colortest.sh'
 alias ps='ps -f'
 alias shred='shred -zv'
-alias fvim='[ -d "${1:-.}" ] && vim "$(fzf ${1})" || vim'
 
 # Make some history
 autoload -U history-search-end
