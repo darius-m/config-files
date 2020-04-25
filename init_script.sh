@@ -8,7 +8,7 @@ BASIC_PACKAGES="git vim zsh tmux gcc make "
 MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree cscope ctags"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar "
 FULL_PACKAGES+="xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf gnome-terminal "
-FULL_PACKAGES+="gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre "
+FULL_PACKAGES+="gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre thunderbird "
 FAILED_PACKAGES=""
 
 PKGMGRS="apt apt-get yum pkg pacman"
