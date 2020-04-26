@@ -11,7 +11,6 @@
 
 set $mod Mod4
 set $terminal gnome-terminal
-set $wallpaper /usr/share/backgrounds/warty-final-ubuntu.png
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -29,7 +28,7 @@ font xft:FontAwesome, LiberationMono 9
 floating_modifier $mod
 
 # Automatically lock screen after some time
-exec --no-startup-id xautolock -time 30 -locker 'i3lock -i $wallpaper -f' &
+exec --no-startup-id xautolock -time 30 -locker '~/.i3/i3lock -f'
 
 # Create a binding to use the GNOME screenshot tool
 bindsym $mod+p exec --no-startup-id gnome-screenshot -ia
@@ -134,7 +133,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$sys_lock"
 set $sys_lock (l)ock, (Shift+r)estart, (Shift+s)hutdown, (Shift+l)ogout
 mode "$sys_lock" {
-        bindsym l       exec --no-startup-id i3lock -i $wallpaper -f, mode "default"
+        bindsym l       exec --no-startup-id ~/.i3/i3lock -f, mode "default"
         bindsym Shift+r exec --no-startup-id reboot, mode "default"
         bindsym Shift+s exec --no-startup-id poweroff, mode "default"
         bindsym Shift+l exec --no-startup-id i3-msg exit, mode "default"

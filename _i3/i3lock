@@ -1,0 +1,29 @@
+#!/bin/sh
+
+I3_DIR=$(echo ~/.i3/)
+BACKGROUND_IMG_TMP="${I3_DIR}/background-tmp.jpg"
+BACKGROUND_IMG_THUMB="${I3_DIR}/background-tmp-thumb.jpg"
+BACKGROUND_IMG="${I3_DIR}/background.png"
+
+# Scaling, in percents
+IMG_SCALE=10
+
+clear_imgs() {
+    [ -e "${BACKGROUND_IMG_TMP}" ] && shred -zu "${BACKGROUND_IMG_TMP}"
+    [ -e "${BACKGROUND_IMG_THUMB}" ] && shred -zu "${BACKGROUND_IMG_THUMB}"
+    [ -e "${BACKGROUND_IMG}" ] && shred -zu "${BACKGROUND_IMG}"
+}
+
+trap 'clear_imgs' EXIT INT STOP TERM QUIT
+
+clear_imgs
+
+# Take a screenshot with scrot, without compression, and create a thumbnail for it
+scrot -o "${BACKGROUND_IMG_TMP}" -t ${IMG_SCALE} -q 100
+# Take the size of the original image before deleting it
+IMG_WIDTH=$(identify -format "%w" "${BACKGROUND_IMG_TMP}")
+shred -zu "${BACKGROUND_IMG_TMP}"
+# Convert the image with imagemagick
+convert "${BACKGROUND_IMG_THUMB}" -gaussian-blur 0x1 -scale ${IMG_WIDTH} "${BACKGROUND_IMG}"
+# Use the converted image as background for i3lock
+i3lock $@ -i "${BACKGROUND_IMG}"
