@@ -133,6 +133,11 @@ if has("cscope")
         "set cscopequickfix=s-,c-,d-,i-,t-,e-,g-
 endif
 
+" Mappings for lgrep to search for definitions in the current directory
+" recursively
+nnoremap <silent><leader>l :lgrep <C-R>=expand("<cword>")<CR> -nr .<CR><CR>
+nnoremap <leader>w :lw<CR>
+
 " More tabs -- we have enough memory.
 set tabpagemax=20
 
