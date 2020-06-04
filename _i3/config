@@ -195,3 +195,6 @@ workspace 6 output secondary
 workspace 7 output secondary
 workspace 8 output secondary
 workspace 9 output primary
+
+# Disable mouse warping (jumping to newly selected window)
+mouse_warping none
