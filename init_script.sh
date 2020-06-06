@@ -9,7 +9,7 @@ MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree csco
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar
     xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf gnome-terminal
     gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre thunderbird
-    graphicsmagick
+    graphicsmagick scrot compton hexchat
 "
 FAILED_PACKAGES=""
 
