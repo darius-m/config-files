@@ -185,6 +185,9 @@ exec --no-startup-id compton
 # Make Teams notifications floating
 for_window [title="Microsoft Teams Notification"] floating enable
 
+# Make applet popups floating
+for_window [class="Dock_applet.py"] floating enable
+
 # Bind workspaces to monitors by default
 workspace 1 output primary
 workspace 2 output primary

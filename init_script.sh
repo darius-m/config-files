@@ -9,7 +9,7 @@ MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree csco
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar
     xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf gnome-terminal
     gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre thunderbird
-    graphicsmagick scrot compton hexchat
+    graphicsmagick scrot compton hexchat ttf-mscorefonts-installer
 "
 FAILED_PACKAGES=""
 
@@ -133,6 +133,8 @@ if [ ${DELETE_CONF:-0} -eq 1 ]; then
 	DELCMD="rm -rf ~/.i3 ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/termite ~/.config/polybar"
 fi
 
+# Perform a font cache refresh after installing the mscore fonts
+fc-cache -fv
 
 su "${FOR_USER}" -c "
 # Get the configuration files and install them
