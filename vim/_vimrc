@@ -157,6 +157,9 @@ set cursorline
 " Open new vertical splits to the right of current one.
 set splitright
 
+" Open horizontal splits down
+set splitbelow
+
 set hidden
 set smartcase
 set ignorecase
