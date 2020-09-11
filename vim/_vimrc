@@ -56,13 +56,24 @@ endfunction
 " Use vundle for plugin management
 set nocompatible
 "filetype off
-" You will need to install Vundle and YouCompleteMe to use the following
-" (commented) lines
+" You will need to install Vundle for these to work
 "set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
 
 "Plugin 'Valloric/YouCompleteMe'
 
+"let s:use_ansible_vim = 1
+"if (s:use_ansible_vim == 1)
+"	Plugin 'pearofducks/ansible-vim'
+"
+"	autocmd BufRead,BufNewFile *.yml setlocal ft=yaml.ansible
+"
+"	let g:ansible_unident_after_newline = 1
+"	let g:ansible_attribute_highlight = "ab"
+"	let g:ansible_name_highlight = "b"
+"	let g:ansible_extra_keywords_highlight = 1
+"endif
+"
 "call vundle#end()
 filetype plugin indent on
 " vundle end
