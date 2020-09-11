@@ -201,3 +201,5 @@ workspace 9 output primary
 
 # Disable mouse warping (jumping to newly selected window)
 mouse_warping none
+
+for_window [class="Gnome-screenshot"] floating enabled
