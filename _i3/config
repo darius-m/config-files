@@ -180,7 +180,7 @@ bar {
 exec --no-startup-id ~/.i3/touch_click.sh
 
 # Enable compton
-exec --no-startup-id compton
+#exec --no-startup-id compton -b
 
 # Make Teams notifications floating
 for_window [title="Microsoft Teams Notification"] floating enable
