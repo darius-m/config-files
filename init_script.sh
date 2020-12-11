@@ -5,7 +5,7 @@ set -u
 PROGNAME="${0}"
 
 BASIC_PACKAGES="git vim zsh tmux gcc make "
-MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox termite zathura pstree cscope ctags"
+MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox kitty zathura pstree cscope ctags"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar
     xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf gnome-terminal
     gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre thunderbird
@@ -121,7 +121,7 @@ fi
 DELCMD=""
 if [ ${DELETE_CONF:-0} -eq 0 ]; then
 	echo -n 'Delete the config files: '
-	echo -n '~/.vimrc ~/.i3 ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/termite ~/.config/polybar ? '
+	echo -n '~/.vimrc ~/.i3 ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/kitty ~/.config/polybar ? '
 	read ANSWER
 
 	case ${ANSWER} in
@@ -130,7 +130,7 @@ if [ ${DELETE_CONF:-0} -eq 0 ]; then
 fi
 
 if [ ${DELETE_CONF:-0} -eq 1 ]; then
-	DELCMD="rm -rf ~/.i3 ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/termite ~/.config/polybar"
+	DELCMD="rm -rf ~/.i3 ~/.vimrc ~/.vim ~/.tmux.conf ~/.zshrc ~/.config/i3blocks ~/.config/kitty ~/.config/polybar"
 fi
 
 # Perform a font cache refresh after installing the mscore fonts
@@ -149,15 +149,15 @@ fi
 ${DELCMD}
 
 mkdir -p ~/.config/
-command -v vim > /dev/null && ln -s ~/.config-files.git/vim/_vim ~/.vim && ln -s ~/.config-files.git/vim/_vimrc ~/.vimrc
-command -v tmux > /dev/null && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
-command -v zsh > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
-command -v termite > /dev/null && ln -s ~/.config-files.git/_config/termite ~/.config/termite
-command -v polybar > /dev/null && ln -s ~/.config-files.git/_config/polybar ~/.config/polybar
-command -v i3 > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
+command -v vim      > /dev/null && ln -s ~/.config-files.git/vim/_vim ~/.vim && ln -s ~/.config-files.git/vim/_vimrc ~/.vimrc
+command -v tmux     > /dev/null && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
+command -v zsh      > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
+command -v kitty    > /dev/null && ln -s ~/.config-files.git/_config/kitty    ~/.config/kitty
+command -v polybar  > /dev/null && ln -s ~/.config-files.git/_config/polybar  ~/.config/polybar
+command -v i3       > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
 command -v i3blocks > /dev/null && ln -s ~/.config-files.git/_config/i3blocks ~/.config/i3blocks
-command -v compton > /dev/null && ln -s ~/.config-files.git/_config/compton.conf ~/.config/compton.conf
-command -v zathura > /dev/null && xdg-mime default zathura.desktop application/pdf
+command -v compton  > /dev/null && ln -s ~/.config-files.git/_config/compton.conf ~/.config/compton.conf
+command -v zathura  > /dev/null && xdg-mime default zathura.desktop application/pdf
 "
 
 if [ ! -z "${FAILED_PACKAGES}" ]; then
