@@ -11,7 +11,7 @@ filetype plugin on
 " Per-filetype settings
 autocmd FileType java		setlocal tw=78 cin foldmethod=marker
 autocmd FileType c,cpp		setlocal tw=80 cindent noexpandtab
-autocmd FileType python		setlocal autoindent expandtab sts=4 sw=4 tw=78
+autocmd FileType python		setlocal autoindent noexpandtab sts=4 sw=4 tw=78
 autocmd FileType haskell	setlocal tw=72 sw=2 sts=2 et
 autocmd FileType tex		call SetTexSettings()
 " 'linebreak' won't work without 'nolist'
@@ -21,6 +21,7 @@ autocmd FileType lua		setlocal sts=4 sw=4 ai et
 autocmd FileType rust		setlocal cin
 autocmd FileType sh		setlocal sts=4 sw=4 si et
 autocmd FileType asm		setlocal noexpandtab
+autocmd FileType php,html	setlocal ts=4 sw=4 sts=4 expandtab
 
 " Custom filetypes per extension. Not sure this is the recommended way to do it.
 autocmd BufRead,BufNewFile *.wiki setlocal ft=creole
@@ -32,6 +33,8 @@ autocmd BufRead,BufNewFile *.g setlocal ft=antlr
 autocmd BufRead,BufNewFile *.rkt setlocal ft=scheme
 autocmd BufRead,BufNewFile *.[sS] setlocal ft=asm
 autocmd BufRead,BufNewFile *.asm setlocal ft=asm
+autocmd BufRead,BufNewFile *.html setlocal ft=html
+autocmd BufRead,BufNewFile *.php setlocal ft=php
 autocmd BufRead,BufNewFile Makefile.* setlocal ft=make
 autocmd BufRead,BufNewFile SConstruct* setlocal ft=python tw=0
 autocmd BufRead,BufNewFile SConscript* setlocal ft=python tw=0
@@ -324,6 +327,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 highlight UselessWhitespace ctermbg=darkred
 match UselessWhitespace /\s\+$/
 autocmd ColorScheme * highlight UselessWhitespace ctermbg=darkred
+autocmd BufRead,BufNewFile * highlight UselessWhitespace ctermbg=darkred
 
 set bs=2
 
