@@ -36,6 +36,7 @@ function print_chars()
 
 function update_ps()
 {
+	echo -en '\x1b[K'
 	echo -en '%B%(0?.%F{green}.%F{red})'
 	echo -en '%${COLUMNS}>>'
 	echo -en '`print_chars $(( (${COLUMNS} - $(print -P "(%!:%?%)" | wc -m)) / 2 + ${COLUMNS} % 2)) "\u169b"`'
