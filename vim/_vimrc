@@ -191,6 +191,9 @@ vnoremap <C-j> :<C-u>silent! '<,'>m '>+1<CR>`[V`]
 
 nnoremap <silent><leader>, :noh<cr>
 
+" Required for kitty proper colors - https://github.com/kovidgoyal/kitty/issues/108
+let &t_ut=''
+
 " Set folding options
 autocmd ColorScheme * highlight Folded ctermbg=black ctermfg=41
 set foldlevel=5
