@@ -4,10 +4,10 @@ set -u
 
 PROGNAME="${0}"
 
-BASIC_PACKAGES="git vim zsh tmux gcc make "
-MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox kitty zathura pstree cscope ctags"
+BASIC_PACKAGES="git vim zsh tmux gcc make"
+MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox kitty zathura cscope ctags"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar
-    xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf gnome-terminal
+    xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf
     gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre thunderbird
     graphicsmagick scrot compton hexchat ttf-mscorefonts-installer
 "
