@@ -1,0 +1,58 @@
+#!/bin/bash
+# Volume controls using pactl. If you wish to use alsa instead, use the
+# volume script
+
+[ ${BLOCK_BUTTON:-0} -eq 3 -o "${3}" = "mute" ] && CTRL="MUTE"
+[ ${BLOCK_BUTTON:-0} -eq 4 -o "${3}" = "up"   ] && CTRL="UP"
+[ ${BLOCK_BUTTON:-0} -eq 5 -o "${3}" = "down" ] && CTRL="DOWN"
+
+
+# The first parameter sets the step to change the volume by (and units to display)
+# This may be in % or dB (eg. 5% or 3)
+STEP="${1:-5%}"
+
+mute() {
+    pactl set-sink-mute @DEFAULT_SINK@ $@
+}
+
+change_vol() {
+    pactl set-sink-volume @DEFAULT_SINK@ $@
+}
+
+case $CTRL in
+  MUTE) mute toggle ;;  # right click, mute/unmute
+  UP)   change_vol +${STEP}; mute no ;; # scroll up, increase
+  DOWN) change_vol -${STEP}; mute no ;; # scroll down, decrease
+esac
+
+default_sink=$(pactl info | awk '/Default Sink/ { print $3 }')
+
+pactl list sinks | awk -v sink="${default_sink}" '
+    $1 == "Name:" {
+        if ($0 ~ "Name: " sink)
+            get = 1
+        else
+            get = 0
+    }
+
+    $1 == "Mute:" {
+        mute = $2
+    }
+
+    $1 == "Volume:" && get == 1 {
+        percent = int($5)
+
+        if (mute == "yes") {
+            icon = "🔇";
+        } else {
+            if (percent <= 30)
+                icon = "🔈";
+            else if (percent <= 70)
+                icon = "🔉";
+            else
+                icon = "🔊";
+        }
+
+        printf "%s %3d%%\n", icon, percent;
+    }
+'
