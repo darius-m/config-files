@@ -28,7 +28,7 @@ font xft:FontAwesome, LiberationMono 9
 floating_modifier $mod
 
 # Automatically lock screen after some time
-exec --no-startup-id xautolock -time 30 -locker '~/.i3/i3lock -f'
+#exec --no-startup-id xautolock -time 30 -locker '~/.i3/i3lock -f'
 
 # Create a binding to use the GNOME screenshot tool
 bindsym $mod+p exec --no-startup-id gnome-screenshot -ia
@@ -88,9 +88,9 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # Volume control
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3blocks/volume "5%" pulse up   2>&1 >/dev/null && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3blocks/volume "5%" pulse down 2>&1 >/dev/null && pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3blocks/volume "5%" pulse mute 2>&1 >/dev/null && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3blocks/volume-pactl "5%" "" up   2>&1 >/dev/null && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3blocks/volume-pactl "5%" "" down 2>&1 >/dev/null && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3blocks/volume-pactl "5%" "" mute 2>&1 >/dev/null && pkill -SIGRTMIN+10 i3blocks
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -174,6 +174,7 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command i3blocks
+        tray_output none
 }
 
 # Enable touchpad touch click
