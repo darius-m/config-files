@@ -90,7 +90,7 @@ interval=5
 # See the script for details.
 [volume]
 instance=Master
-command=~/.config/i3blocks/volume "5%" pulse
+command=~/.config/i3blocks/volume-pactl "5%" pulse
 signal=10
 interval=2
 
