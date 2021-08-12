@@ -1,7 +1,7 @@
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  history: 200000
+  history: 50000
 
 # Font configuration
 font:
