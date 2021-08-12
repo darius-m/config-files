@@ -5,7 +5,7 @@ set -u
 PROGNAME="${0}"
 
 BASIC_PACKAGES="git vim zsh tmux gcc make"
-MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox kitty zathura cscope ctags"
+MEDIUM_PACKAGES="htop unzip zip gcc-multilib firefox alacritty zathura cscope ctags"
 FULL_PACKAGES="texlive-full inkscape gimp chromium-browser i3 i3blocks polybar
     xautolock lm-sensors filezilla gnome-screenshot pavucontrol fzf
     gparted virtualbox virtualbox-ext-pack openvpn ntpdate vinagre thunderbird
@@ -149,15 +149,16 @@ fi
 ${DELCMD}
 
 mkdir -p ~/.config/
-command -v vim      > /dev/null && ln -s ~/.config-files.git/vim/_vim ~/.vim && ln -s ~/.config-files.git/vim/_vimrc ~/.vimrc
-command -v tmux     > /dev/null && ln -s ~/.config-files.git/_tmux.conf ~/.tmux.conf
-command -v zsh      > /dev/null && ln -s ~/.config-files.git/_zshrc ~/.zshrc
-command -v kitty    > /dev/null && ln -s ~/.config-files.git/_config/kitty    ~/.config/kitty
-command -v polybar  > /dev/null && ln -s ~/.config-files.git/_config/polybar  ~/.config/polybar
-command -v i3       > /dev/null && ln -s ~/.config-files.git/_i3 ~/.i3
-command -v i3blocks > /dev/null && ln -s ~/.config-files.git/_config/i3blocks ~/.config/i3blocks
-command -v compton  > /dev/null && ln -s ~/.config-files.git/_config/compton.conf ~/.config/compton.conf
-command -v zathura  > /dev/null && xdg-mime default zathura.desktop application/pdf
+command -v vim          > /dev/null && ln -s ~/.config-files.git/vim/_vim ~/.vim && ln -s ~/.config-files.git/vim/_vimrc ~/.vimrc
+command -v tmux         > /dev/null && ln -s ~/.config-files.git/_tmux.conf           ~/.tmux.conf
+command -v zsh          > /dev/null && ln -s ~/.config-files.git/_zshrc               ~/.zshrc
+command -v kitty        > /dev/null && ln -s ~/.config-files.git/_config/kitty        ~/.config/kitty
+command -v alacritty    > /dev/null && ln -s ~/.config-files.git/_config/alacritty    ~/.config/alacritty
+command -v polybar      > /dev/null && ln -s ~/.config-files.git/_config/polybar      ~/.config/polybar
+command -v i3           > /dev/null && ln -s ~/.config-files.git/_i3                  ~/.i3
+command -v i3blocks     > /dev/null && ln -s ~/.config-files.git/_config/i3blocks     ~/.config/i3blocks
+command -v compton      > /dev/null && ln -s ~/.config-files.git/_config/compton.conf ~/.config/compton.conf
+command -v zathura      > /dev/null && xdg-mime default zathura.desktop application/pdf
 "
 
 if [ ! -z "${FAILED_PACKAGES}" ]; then

@@ -1,0 +1,197 @@
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 200000
+
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    family: JetBrains Mono
+
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+
+  # Point size
+  size: 9.0
+
+# Colors (Tomorrow Night)
+colors:
+  # Argonaut theme as base from
+  # https://github.com/dexpota/kitty-themes/blob/master/themes/Argonaut.conf
+  primary:
+    background: '#121212'
+    foreground: '#d8d8d8'
+
+  # Cursor colors
+  cursor:
+    text: CellBackground
+    cursor: '#80bf80'
+
+  # Normal colors
+  normal:
+    black:   '#222222'
+    red:     '#ff000f'
+    green:   '#8ce00a'
+    yellow:  '#ffe900'
+    blue:    '#407dc8'
+    magenta: '#6c43a5'
+    cyan:    '#00d7eb'
+    white:   '#c5c8c6'
+
+  # Bright colors
+  bright:
+    black:   '#444444'
+    red:     '#ff273f'
+    green:   '#abe05a'
+    yellow:  '#fff141'
+    blue:    '#00a2ff'
+    magenta: '#9a5feb'
+    cyan:    '#67ffef'
+    white:   '#eaeaea'
+
+# Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.9
+
+selection:
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: false
+
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    shape: Block
+
+    # Cursor blinking state
+    blinking: On
+
+# Bindings are always filled by default, but will be replaced when a new
+# binding with the same triggers is defined. To unset a default binding, it can
+# be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
+# a no-op if you do not wish to receive input characters for that binding.
+#
+# If the same trigger is assigned to multiple actions, all of them are executed
+# in the order they were defined in.
+key_bindings:
+  - { key: Paste,                                         action: None            }
+  - { key: Copy,                                          action: None            }
+  - { key: L,         mods: Control,                      action: None            }
+  - { key: L,         mods: Control,   mode: ~Vi|~Search, chars: "\x0c"           }
+  - { key: PageUp,    mods: Shift,     mode: ~Alt,        action: ScrollPageUp    }
+  - { key: PageDown,  mods: Shift,     mode: ~Alt,        action: ScrollPageDown  }
+  - { key: Home,      mods: Shift,     mode: ~Alt,        action: ScrollToTop     }
+  - { key: End,       mods: Shift,     mode: ~Alt,        action: ScrollToBottom  }
+  - { key: PageUp,    mods: Control,   mode: ~Alt,        action: ScrollPageUp    }
+  - { key: PageDown,  mods: Control,   mode: ~Alt,        action: ScrollPageDown  }
+  - { key: Home,      mods: Control,   mode: ~Alt,        action: ScrollToTop     }
+  - { key: End,       mods: Control,   mode: ~Alt,        action: ScrollToBottom  }
+
+  # Vi Mode
+  - { key: Space,  mods: Shift|Control, mode: ~Search,    action: None }
+  - { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: None }
+  - { key: Escape,                      mode: Vi|~Search, action: None }
+  - { key: I,                           mode: Vi|~Search, action: None }
+  - { key: I,                           mode: Vi|~Search, action: None }
+  - { key: C,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: Y,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: E,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: G,                           mode: Vi|~Search, action: None }
+  - { key: G,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: B,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: F,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: U,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: D,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: Y,                           mode: Vi|~Search, action: None }
+  - { key: Y,                           mode: Vi|~Search, action: None }
+  - { key: Copy,                        mode: Vi|~Search, action: None }
+  - { key: V,                           mode: Vi|~Search, action: None }
+  - { key: V,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: V,      mods: Control,       mode: Vi|~Search, action: None }
+  - { key: V,      mods: Alt,           mode: Vi|~Search, action: None }
+  - { key: Return,                      mode: Vi|~Search, action: None }
+  - { key: K,                           mode: Vi|~Search, action: None }
+  - { key: J,                           mode: Vi|~Search, action: None }
+  - { key: H,                           mode: Vi|~Search, action: None }
+  - { key: L,                           mode: Vi|~Search, action: None }
+  - { key: Up,                          mode: Vi|~Search, action: None }
+  - { key: Down,                        mode: Vi|~Search, action: None }
+  - { key: Left,                        mode: Vi|~Search, action: None }
+  - { key: Right,                       mode: Vi|~Search, action: None }
+  - { key: Key0,                        mode: Vi|~Search, action: None }
+  - { key: Key4,   mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: Key6,   mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: H,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: M,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: L,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: B,                           mode: Vi|~Search, action: None }
+  - { key: W,                           mode: Vi|~Search, action: None }
+  - { key: E,                           mode: Vi|~Search, action: None }
+  - { key: B,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: W,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: E,      mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: Key5,   mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: Slash,                       mode: Vi|~Search, action: None }
+  - { key: Slash,  mods: Shift,         mode: Vi|~Search, action: None }
+  - { key: N,                           mode: Vi|~Search, action: None }
+  - { key: N,      mods: Shift,         mode: Vi|~Search, action: None }
+
+  # Search Mode
+  - { key: Return,                mode: Search|Vi,  action: None }
+  - { key: Escape,                mode: Search,     action: None }
+  - { key: C,      mods: Control, mode: Search,     action: None }
+  - { key: U,      mods: Control, mode: Search,     action: None }
+  - { key: W,      mods: Control, mode: Search,     action: None }
+  - { key: P,      mods: Control, mode: Search,     action: None }
+  - { key: N,      mods: Control, mode: Search,     action: None }
+  - { key: Up,                    mode: Search,     action: None }
+  - { key: Down,                  mode: Search,     action: None }
+  - { key: Return,                mode: Search|~Vi, action: None }
+  - { key: Return, mods: Shift,   mode: Search|~Vi, action: None }
+
+  # (Windows, Linux, and BSD only)
+  - { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
+  - { key: C,              mods: Control|Shift,                   action: Copy             }
+  - { key: F,              mods: Control|Shift, mode: ~Search,    action: None             }
+  - { key: B,              mods: Control|Shift, mode: ~Search,    action: None             }
+  - { key: C,              mods: Control|Shift, mode: Vi|~Search, action: None             }
+  - { key: Insert,         mods: Shift,                           action: None             }
+  - { key: Key0,           mods: Control,                         action: None             }
+  - { key: Equals,         mods: Control,                         action: None             }
+  - { key: Plus,           mods: Control,                         action: None             }
+  - { key: NumpadAdd,      mods: Control,                         action: None             }
+  - { key: Minus,          mods: Control,                         action: None             }
+  - { key: NumpadSubtract, mods: Control,                         action: None             }
+  # Bindings for CTRL+SHIFT+[0-=]
+  - { key: 11,             mods: Control|Shift,                   action: ResetFontSize    }
+  - { key: Plus,           mods: Control|Shift,                   action: IncreaseFontSize }
+  - { key: 12,             mods: Control|Shift,                   action: DecreaseFontSize }
+
+  # (Windows only)
+  - { key: Return,   mods: Alt,           action: None }
+
+  # (macOS only)
+  - { key: K,              mods: Command, mode: ~Vi|~Search, action: None }
+  - { key: K,              mods: Command, mode: ~Vi|~Search, action: None }
+  - { key: Key0,           mods: Command,                    action: None }
+  - { key: Equals,         mods: Command,                    action: None }
+  - { key: Plus,           mods: Command,                    action: None }
+  - { key: NumpadAdd,      mods: Command,                    action: None }
+  - { key: Minus,          mods: Command,                    action: None }
+  - { key: NumpadSubtract, mods: Command,                    action: None }
+  - { key: V,              mods: Command,                    action: None }
+  - { key: C,              mods: Command,                    action: None }
+  - { key: C,              mods: Command, mode: Vi|~Search,  action: None }
+  - { key: H,              mods: Command,                    action: None }
+  - { key: H,              mods: Command|Alt,                action: None }
+  - { key: M,              mods: Command,                    action: None }
+  - { key: Q,              mods: Command,                    action: None }
+  - { key: W,              mods: Command,                    action: None }
+  - { key: N,              mods: Command,                    action: None }
+  - { key: F,              mods: Command|Control,            action: None }
+  - { key: F,              mods: Command, mode: ~Search,     action: None }
+  - { key: B,              mods: Command, mode: ~Search,     action: None }
