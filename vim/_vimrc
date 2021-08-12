@@ -84,6 +84,9 @@ set hidden
 set smartcase
 set ignorecase
 
+" Disable swap files
+set noswapfile
+
 nnoremap <F9> :cwindow<CR>
 nnoremap <F10> :ccl<CR>
 
