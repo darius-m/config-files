@@ -17,33 +17,34 @@
 TYPE="${BLOCK_INSTANCE:-mem}"
 
 awk -v type=$TYPE '
-/^MemTotal:/ {
+function gb(v) { return v/1024/1024 }
+function color(c, t) { return "<span foreground=\"" c "\">" t "</span>" }
+function y(text) { return color("#ffff40", text) }
+function b(text) { return color("#20baff", text) }
+function g(text) { return color("#00ff00", text) }
+
+/^Mem:/ {
 	mem_total=$2
+	mem_used=$3
+	mem_free=$4
+	mem_cache=$6
 }
-/^MemFree:/ {
-	mem_free=$2
-}
-/^Buffers:/ {
-	mem_free+=$2
-}
-/^Cached:/ {
-	mem_free+=$2
-}
-/^SwapTotal:/ {
+
+/^Swap:/ {
 	swap_total=$2
+	swap_used=$3
+	swap_free=$4
 }
-/^SwapFree:/ {
-	swap_free=$2
-}
+
 END {
 	# full text
 	if (type == "swap")
-		printf("U: %.1fG\n", (swap_total - swap_free)/1024/1024)
+		printf(y("U: %.1fG") "\n", gb(swap_used))
 	else
-		printf("U: %.1fG / T: %.1fG\n", (mem_total - mem_free)/1024/1024, mem_total/1024/1024)
+		printf(y("U: %.1fG") " / " b("C: %.1fG") " / " g("T: %.1fG") "\n", gb(mem_used), gb(mem_cache), gb(mem_total))
 
 	# TODO: short text
 
 	# TODO: color (if less than X%)
 }
-' /proc/meminfo
+' <(free -k)

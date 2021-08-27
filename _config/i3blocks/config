@@ -42,6 +42,7 @@ interval=1
 [memory]
 label=🐏
 interval=5
+markup=pango
 
 # Disk usage
 #
