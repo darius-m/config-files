@@ -2,6 +2,7 @@
 set encoding=utf-8
 
 syntax on
+set synmaxcol=600
 
 " Add modeline functionality -- it's disabled by default on some distros
 set modeline
