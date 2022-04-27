@@ -7,7 +7,7 @@ set synmaxcol=600
 " Add modeline functionality -- it's disabled by default on some distros
 set modeline
 
-filetype plugin on
+filetype plugin indent on
 
 " Custom filetypes per extension. Not sure this is the recommended way to do it.
 autocmd BufRead,BufNewFile *.wiki setlocal ft=creole
@@ -46,8 +46,6 @@ set nocompatible
 "call vundle#end()
 " vundle end
 " Done youcompleteme
-
-filetype plugin indent on
 
 set autowrite
 set nowrap
