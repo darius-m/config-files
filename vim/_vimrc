@@ -50,9 +50,6 @@ set nocompatible
 set autowrite
 set nowrap
 
-" Use /tmp as directory for temporary files
-set dir=/tmp
-
 " Ripped off from Alexandru Mosoi
 set statusline=%<%f\ %y%h%m%r%=%-24.(0x%02B,%l/%L,%c%V%)\ %P
 set laststatus=2
