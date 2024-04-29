@@ -106,9 +106,9 @@ interval=5
 
 # Date Time
 #
-[time]
-command=~/.config/i3blocks/date
-interval=1
+#[time]
+#command=~/.config/i3blocks/date
+#interval=1
 
 # Generic media player support
 #
