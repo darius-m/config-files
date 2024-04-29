@@ -63,6 +63,12 @@ shape = "Block"
 # Cursor blinking state
 blinking = "On"
 
+# Disable (URL) hints
+[[hints.enabled]]
+command = ""
+hyperlinks = true
+mouse.enabled = false
+
 # Bindings are always filled by default, but will be replaced when a new
 # binding with the same triggers is defined. To unset a default binding, it can
 # be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
