@@ -3,7 +3,7 @@ setlocal sw=2
 setlocal sts=2
 setlocal ai
 setlocal et
-setlocal noexpandtab
+setlocal expandtab
 setlocal spell
 setlocal spelllang=en_gb
 syntax spell toplevel
