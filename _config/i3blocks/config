@@ -58,20 +58,20 @@ interval=30
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-[iface]
+#[iface]
 #instance=wlan0
-label=🛰️
-color=#00FF00
-interval=1
+#label=🛰️
+#color=#00FF00
+#interval=1
 
-[wifi]
+#[wifi]
 #instance=wlp3s0
-label=WIFI
-interval=1
+#label=WIFI
+#interval=1
 
-[bandwidth]
+#[bandwidth]
 #instance=eth0
-interval=1
+#interval=1
 
 [load_average]
 label=load_avg:
@@ -80,9 +80,9 @@ interval=3
 # Battery indicator
 #
 # The battery instance defaults to 0.
-[battery]
-label=⚡
-interval=5
+#[battery]
+#label=⚡
+#interval=5
 
 # Volume indicator
 #
